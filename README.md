@@ -17,7 +17,7 @@ In some situations, the mean describes what is being measured, while the standar
 * σ^2 = variance
 * σ = standard deviation = how far the signal fluctuates from the mean = √[((x0-μ)^2 + (x1-μ)^2 + ... + (xN-1-μ)^2)/(N-1)]
 
-![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/06a834cd-fea3-45bc-a8c5-e68a1a62b6b8)
+![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/c7f11452-ef56-4048-8cb9-78ffcbf81faa)
 
 ### Histogram
 
@@ -78,5 +78,11 @@ Now that I know how to generate digital noise with a Gaussian pdf and also how t
 
 # Running statiscs
 
+It is often desirable to recalculate the mean and standard deviation as new samples are acquired and added to the signal. We will call this type of calculation: running statistics.
+We don't need that all of the samples be involved in each new calculation, so we will use EQUATION 2.3.
 
 ![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/fb1f644b-cc65-497a-bb73-79d79baa3967)
+
+Once in my article for SBrT we use similar equations as in 2.1 and 2.2, later I will compare results. 
+
+![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/4e6c1599-7c5f-49ec-8ebf-45a9e331340a)
