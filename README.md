@@ -79,10 +79,73 @@ Now that I know how to generate digital noise with a Gaussian pdf and also how t
 # Running statiscs
 
 It is often desirable to recalculate the mean and standard deviation as new samples are acquired and added to the signal. We will call this type of calculation: running statistics.
+Once in my article for SBrT we use similar equations as in 2.1 and 2.2, later I will compare results with EQUATIOn 2.3. 
+
+![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/4e6c1599-7c5f-49ec-8ebf-45a9e331340a)
+
+I decided to leave the user to choose the window size for the running statistics by:
+
+```py
+# To enter with the window size
+window_size = input('Enter window size (2 to 100 [1/10 of the total]) = ')
+# It returns <class 'str'>
+window_size_N = int(window_size) # To convert str to int
+print(type(window_size_N))
+```
+
+Then I do the math by:
+
+```py
+if window_size_N <= 1:
+    print('Window size cannont be lesser than 2')
+elif window_size_N > 101: #elif = else if
+    print('Window size cannont be greater than 101')
+else:
+    print('Running statistcs considering window size of: ', window_size_N) 
+    # X is a <class 'numpy.ndarray'>
+    val_run = 0
+    std_deviation_running = np.array(0)
+    print(type(std_deviation_running))
+    # Shows how many dimention the array has, not elements
+    # print(std_deviation_running.ndim) 
+    #std_deviation_running = np.append(std_deviation_running, 10)
+    
+    print(std_deviation_running)
+    for val in X:
+        with np.errstate(divide='ignore', invalid='ignore'):
+            # val returns <class 'numpy.float64'>
+            # To run over all the random values by incrementing 1
+            val_run = val_run+1 
+            # array_partial = initial value up to window size
+            # then do it again, but initial value + 1 up to window size + 1
+            array_partial = X[val_run:window_size_N+val_run]
+            # now, I need to add to an array, each value of std deviation
+            #print(np.std(array_partial))
+            std_deviation_running = np.append(std_deviation_running, np.std(array_partial))
+            #print('Standard deviation: ' + str(np.float64(np.std(array_partial))))
+            #print(array_partial)
+
+    print(std_deviation_running)
+    #plt.subplot(4,2,3)
+    plt.figure(2)
+    plt.plot(std_deviation_running) # Prepare the plot to show the randon values
+    plt.xlabel('Time domain') 
+    plt.ylabel('Standard deviation') 
+    plt.title('Running statistics')#'Random values, normal distribution')
+
+plt.show()
+```
+Now lets compare a window size of 5:
+
+![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/d2e1f6f0-3342-4cab-849f-e23452bb0ebf)
+
+With a window size of 50:
+
+![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/b49ffbd3-714c-49db-8e03-6903813483f5)
+
+The book sugests to use the following calc:
 We don't need that all of the samples be involved in each new calculation, so we will use EQUATION 2.3.
 
 ![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/fb1f644b-cc65-497a-bb73-79d79baa3967)
 
-Once in my article for SBrT we use similar equations as in 2.1 and 2.2, later I will compare results. 
 
-![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/4e6c1599-7c5f-49ec-8ebf-45a9e331340a)
