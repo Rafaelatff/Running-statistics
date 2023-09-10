@@ -143,6 +143,40 @@ With a window size of 50:
 
 ![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/b49ffbd3-714c-49db-8e03-6903813483f5)
 
+Before we go to the book, let's check the IZ data collected for several projects/studies and check if the running statistics is running according to the desired. We will run a test with the data in Rota4_42.txt.
+
+The code that collects the data from Rota4_42.txt is presented (and also added to code running-statistics-IZ.py):
+
+```py
+else:
+    print('Running statistcs considering window size of: ', window_size_N)
+
+    # Now lets import the IZ data, for now Rota4_42.txt
+    # 3 Column, being packet number, RSSI Downlink, RSSI Uplink
+    file = open("Rota4_42.txt", mode='r')
+    print(file.read())
+
+    RSSIdl = np.loadtxt("Rota4_42.txt", delimiter=';', usecols=[1])
+    print(RSSIdl)     
+    file.close()
+```
+
+Then we did a few changes on the running statistic part of the code:
+
+```py
+    print(std_deviation_running)
+    for val in RSSIdl:
+        val_run = val_run+1 
+        array_partial = RSSIdl[val_run:window_size_N+val_run]
+        #print(np.std(array_partial))
+        std_deviation_running = np.append(std_deviation_running, np.std(array_partial))
+```
+And then we plot the data. Now, considering also a window size of 8, let`s compare the data:
+
+![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/806c9723-3604-4feb-a1bf-e8ce194c0ffa)
+
+It looks that the code works fine! Now let's go to the book part:
+
 The book sugests to use the following calc:
 We don't need that all of the samples be involved in each new calculation, so we will use EQUATION 2.3.
 
