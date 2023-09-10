@@ -175,11 +175,10 @@ And then we plot the data. Now, considering also a window size of 8, let`s compa
 
 ![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/806c9723-3604-4feb-a1bf-e8ce194c0ffa)
 
-It looks that the code works fine! Now let's go to the book part:
-
 The book sugests to use the following calc:
 We don't need that all of the samples be involved in each new calculation, so we will use EQUATION 2.3.
 
 ![image](https://github.com/Rafaelatff/Running-statistics/assets/58916022/fb1f644b-cc65-497a-bb73-79d79baa3967)
 
+Once the python code easy calculates the standard deviation (this is not running on a embedded system), we will consider this part of the studies complete. The EQUATION 2.3 can be implemented, but not at this moment.
 
